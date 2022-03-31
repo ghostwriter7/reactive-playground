@@ -1,5 +1,7 @@
+<app-header title="Clicking Ninja">
+  Press start and begin clicking as fast as you possibly can.
+</app-header>
 <button class="start" (click)="onStart()" *ngIf="!isActive">Start</button>
-
 <div appPlaceholder #game id="game"></div>
 <div *ngIf="isGameOver" class="game-over">YOU LOST! GAME IS OVER!</div>
 
