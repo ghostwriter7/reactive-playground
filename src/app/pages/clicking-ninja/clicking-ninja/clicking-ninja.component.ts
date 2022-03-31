@@ -1,7 +1,7 @@
 import {
   Component, ComponentFactory,
   ComponentFactoryResolver, ComponentRef,
-  ElementRef,
+  ElementRef, OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
@@ -23,7 +23,7 @@ interface State {
   styleUrls: ['./clicking-ninja.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClickingNinjaComponent implements OnInit {
+export class ClickingNinjaComponent implements OnInit, OnDestroy {
   @ViewChild('game', { static: true }) gameEl!: ElementRef;
   @ViewChild(PlaceholderDirective, { static: true }) host!: PlaceholderDirective;
   private _game$!: Subscription;
@@ -51,7 +51,7 @@ export class ClickingNinjaComponent implements OnInit {
         score: state.score + 1,
         interval: timeInterval.interval,
         threshold: state.threshold - 2
-      }), { score: 0, interval: 0, threshold: 3000}),
+      }), { score: 0, interval: 0, threshold: 300}),
       takeWhile(state => state.interval < state.threshold),
       tap(this.render.bind(this)),
       finalize(this.clear.bind(this)),
@@ -82,5 +82,9 @@ export class ClickingNinjaComponent implements OnInit {
   private clear(): void {
     this._domElements = [];
     this.host.viewContainerRef.clear();
+  }
+
+  ngOnDestroy() {
+    this._game$.unsubscribe();
   }
 }
