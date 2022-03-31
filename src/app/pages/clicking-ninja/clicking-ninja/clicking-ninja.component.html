@@ -1,1 +1,6 @@
+<button class="start" (click)="onStart()" *ngIf="!isActive">Start</button>
+
 <div appPlaceholder #game id="game"></div>
+<div *ngIf="isGameOver" class="game-over">YOU LOST! GAME IS OVER!</div>
+
+

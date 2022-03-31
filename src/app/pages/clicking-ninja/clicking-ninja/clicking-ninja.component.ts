@@ -3,11 +3,20 @@ import {
   ComponentFactoryResolver, ComponentRef,
   ElementRef, OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild,
-  ViewEncapsulation
 } from '@angular/core';
-import { finalize, fromEvent, repeat, scan, Subscription, takeWhile, tap, TimeInterval, timeInterval } from 'rxjs';
+import {
+  finalize,
+  fromEvent,
+  Observable,
+  repeat,
+  scan, skip, skipUntil, skipWhile, Subject,
+  Subscription, switchMap,
+  takeWhile,
+  tap,
+  TimeInterval,
+  timeInterval
+} from 'rxjs';
 import { TileComponent } from '../tile/tile.component';
 import { PlaceholderDirective } from '../../../shared/directives/placeholder.directive';
 
@@ -21,11 +30,13 @@ interface State {
   selector: 'app-clicking-ninja',
   templateUrl: './clicking-ninja.component.html',
   styleUrls: ['./clicking-ninja.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class ClickingNinjaComponent implements OnInit, OnDestroy {
   @ViewChild('game', { static: true }) gameEl!: ElementRef;
   @ViewChild(PlaceholderDirective, { static: true }) host!: PlaceholderDirective;
+  public isActive = false;
+  public isGameOver = false;
+
   private _game$!: Subscription;
   private _labels: string[] = [
     'click, click',
@@ -38,15 +49,19 @@ export class ClickingNinjaComponent implements OnInit, OnDestroy {
   ];
   private _domElements: ComponentRef<TileComponent>[] = [];
   private _factory!: ComponentFactory<TileComponent>;
+  private _start$ = new Subject<void>();
 
-  constructor(private _renderer: Renderer2,
-              private _componentFactory: ComponentFactoryResolver) { }
+
+  constructor(private _componentFactory: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
     this._factory = this._componentFactory.resolveComponentFactory(TileComponent);
 
-    this._game$ = fromEvent(document, 'pointerdown').pipe(
+    this._game$ = this._start$.pipe(switchMap(() => fromEvent(document, 'pointerdown').pipe(
+      tap(console.log),
+      skipWhile(() => !this.isActive),
       timeInterval(),
+      tap((int) => console.log(int.interval)),
       scan<TimeInterval<Event>, State>((state, timeInterval) => ({
         score: state.score + 1,
         interval: timeInterval.interval,
@@ -55,8 +70,12 @@ export class ClickingNinjaComponent implements OnInit, OnDestroy {
       takeWhile(state => state.interval < state.threshold),
       tap(this.render.bind(this)),
       finalize(this.clear.bind(this)),
-      repeat()
-    ).subscribe();
+    ))).subscribe();
+  }
+
+  public onStart(): void {
+    this._start$.next();
+    this.isActive = true;
   }
 
   private render(state: State): void {
@@ -80,8 +99,13 @@ export class ClickingNinjaComponent implements OnInit, OnDestroy {
   }
 
   private clear(): void {
-    this._domElements = [];
-    this.host.viewContainerRef.clear();
+  this.isGameOver = true;
+    setTimeout(() => {
+      this._domElements = [];
+      this.host.viewContainerRef.clear();
+      this.isActive = false;
+      this.isGameOver = false;
+    }, 3000);
   }
 
   ngOnDestroy() {
