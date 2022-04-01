@@ -46,5 +46,11 @@ a {
   min-height: 70vh;
   background-color: var(--bg-primary);
   color: var(--clr-primary);
-  padding: 1rem;
+
+  & > *:not(:first-child) {
+    display: flex;
+    min-height: 70vh;
+    align-items: stretch;
+    flex-direction: column;
+  }
 }

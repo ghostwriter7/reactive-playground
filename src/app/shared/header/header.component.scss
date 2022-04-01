@@ -1,15 +1,19 @@
 .header {
-  background-color: blue;
+  background-color: var(--clr-accent);
   opacity: .8;
   margin-bottom: 1rem;
+  padding: .5rem;
 
   &__title {
     text-transform: uppercase;
-    text-align: center;
-    color: #fff;
+    letter-spacing: 2px;
+    text-align: right;
+    color: var(--clr-primary);
+    margin-bottom: .25rem;
   }
 
   &__description {
-    color: #fff;
+    text-align: center;
+    color: var(--clr-secondary);
   }
 }

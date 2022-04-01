@@ -14,11 +14,17 @@ interface State {
 export class CatchTheDotComponent implements OnInit {
   @ViewChild('dot', { static: true }) dot!: ElementRef;
   @ViewChild('timer', { static: true }) timer!: ElementRef;
+  @ViewChild('area', { static: true }) area!: ElementRef;
   private _game$!: Subscription;
-
+  private _horizontalRange!: [number, number];
+  private _verticalRange!: [number, number];
   constructor(private _renderer: Renderer2) { }
 
   ngOnInit(): void {
+    const { width, height } = this.area.nativeElement.getBoundingClientRect();
+    this._horizontalRange = [-width / 2, width / 2];
+    this._verticalRange = [-height / 2, height / 2];
+
     this._game$ = fromEvent(this.dot.nativeElement, 'mouseenter').pipe(
       tap(this.repositionDot.bind(this)),
       scan<any, State>((state, _) => ({
@@ -37,8 +43,8 @@ export class CatchTheDotComponent implements OnInit {
   private repositionDot(): void {
     this._renderer.setStyle(this.dot.nativeElement, 'width', '5px');
     this._renderer.setStyle(this.dot.nativeElement, 'height', '5px');
-    const x = Math.random() * 250;
-    const y = Math.random() * 250;
+    const x = Math.random() * (this._horizontalRange[1] - this._horizontalRange[0]) + this._horizontalRange[0];
+    const y = Math.random() * (this._verticalRange[1] - this._verticalRange[0]) + this._verticalRange[0];
     this._renderer.setStyle(this.dot.nativeElement, 'transform', `translate(${x}px, ${y}px)`);
   }
 
