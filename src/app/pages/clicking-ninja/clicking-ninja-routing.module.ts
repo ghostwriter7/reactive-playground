@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClickingNinjaComponent } from './clicking-ninja/clicking-ninja.component';
 
 const routes: Routes = [
-  { path: 'game', component: ClickingNinjaComponent }
+  { path: '', component: ClickingNinjaComponent }
 ];
 
 @NgModule({

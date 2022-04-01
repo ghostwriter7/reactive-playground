@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CatchTheDotComponent } from './catch-the-dot/catch-the-dot.component';
 
 const routes: Routes = [
-  { path: 'game', component: CatchTheDotComponent }
+  { path: '', component: CatchTheDotComponent }
 ]
 
 @NgModule({

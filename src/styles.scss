@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@200;400;500&display=swap');
+
+:root {
+  --bg-primary: #5F5449;
+  --bg-secondary: #9B6A6C;
+  --clr-accent: #B09398;
+  --clr-primary: #CEDFD9;
+  --clr-secondary: #EBFCFB;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,19 +15,36 @@
 }
 
 body {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: #4158D0;
-  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  background-color: var(--bg-secondary);
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: var(--clr-accent);
+
+  &:hover {
+    color: var(--clr-secondary);
+  }
+
+  &:active {
+    color: var(--clr-primary);
+  }
 }
 
 .container {
   width: min(85vw, 1000px);
   min-height: 70vh;
-  background-color: #fff;
+  background-color: var(--bg-primary);
+  color: var(--clr-primary);
   padding: 1rem;
-  box-shadow: 10px 10px 0 rgba(0,0,0,.3);
 }

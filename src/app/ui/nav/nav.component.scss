@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-primary);
+  margin-bottom: 1rem;
+
+  padding: 1rem;
+  color: var(--clr-primary);
+
+  &__home-link {
+    font-size: 1.5rem;
+  }
+
+  &__brand {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+}

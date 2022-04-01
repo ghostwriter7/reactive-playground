@@ -1,0 +1,6 @@
+<div class="games">
+  <div class="games__tile" [routerLink]="game.path" *ngFor="let game of gameList">
+    <fa-icon class="games__icon" [icon]="iconsService.getIcon(game.icon)"></fa-icon>
+    <span class="games__name">{{game.name}}</span>
+  </div>
+</div>

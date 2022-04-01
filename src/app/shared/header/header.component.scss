@@ -1,0 +1,15 @@
+.header {
+  background-color: blue;
+  opacity: .8;
+  margin-bottom: 1rem;
+
+  &__title {
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+  }
+
+  &__description {
+    color: #fff;
+  }
+}
