@@ -1,0 +1,11 @@
+<div class="control" [formGroup]="control">
+  <label for="pin">
+    Pin
+    <input formControlName="pin" type="text" id="pin" placeholder="Type 4 digits">
+  </label>
+</div>
+
+
+<div class="lockscreen" #lockscreen>
+  <div class="tile" #tile *ngFor="let digit of digits">{{digit}}</div>
+</div>

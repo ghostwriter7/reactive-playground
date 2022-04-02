@@ -1,0 +1,63 @@
+.lockscreen {
+  display: flex;
+  justify-content: center;
+  margin-inline: auto;
+  flex-wrap: wrap;
+  max-width: calc(3 * (100px + 10px));
+
+  .tile {
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: var(--clr-accent);
+    border-radius: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.control {
+  text-align: center;
+  margin-block: 1rem;
+
+  input {
+    background-color: var(--bg-secondary);
+    border: 0;
+    color: var(--clr-primary);
+    padding: .5rem;
+    margin-left: 1rem;
+
+    &::placeholder {
+      color: var(--clr-secondary);
+    }
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.success {
+  background-color: lightgreen !important;
+  border: 3px solid greenyellow;
+}
+
+.error {
+  background-color: lightpink !important;
+  border: 3px solid orangered;
+}

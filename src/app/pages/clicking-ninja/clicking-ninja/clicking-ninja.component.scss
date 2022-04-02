@@ -20,14 +20,14 @@
   display: block;
   width: 100%;
   padding-block: .5rem;
-  background-color: blue;
+  background-color: var(--bg-secondary);
   border: 0;
-  color: #fff;
-  opacity: 0.5;
+  color: var(--clr-primary);
+  opacity: 0.9;
   cursor: pointer;
   transition: opacity 0.3s ease-in-out;
 
   &:hover {
-    opacity: .8;
+    opacity: .5;
   }
 }
