@@ -11,7 +11,8 @@ export class HomeComponent implements OnInit {
     { path: '/catch-the-dot', icon: 'dot', name: 'Catch the dot!' },
     { path: '/clicking-ninja', icon: 'ninja', name: 'Clicking Ninja' },
     { path: '/lockscreen', icon: 'lock', name: 'Lockscreen' },
-    { path: '/countdown', icon: 'clock', name: 'Countdown' }
+    { path: '/countdown', icon: 'clock', name: 'Countdown' },
+    { path: '/animated-text', icon: 'text', name: 'Animated Text'}
   ];
 
   constructor(public iconsService: IconsService) { }
