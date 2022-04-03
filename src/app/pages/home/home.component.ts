@@ -10,7 +10,8 @@ export class HomeComponent implements OnInit {
   public gameList: { path: string, icon: string, name: string }[] = [
     { path: '/catch-the-dot', icon: 'dot', name: 'Catch the dot!' },
     { path: '/clicking-ninja', icon: 'ninja', name: 'Clicking Ninja' },
-    { path: '/lockscreen', icon: 'lock', name: 'Lockscreen'}
+    { path: '/lockscreen', icon: 'lock', name: 'Lockscreen' },
+    { path: '/countdown', icon: 'clock', name: 'Countdown' }
   ];
 
   constructor(public iconsService: IconsService) { }
